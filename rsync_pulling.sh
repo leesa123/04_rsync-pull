@@ -24,7 +24,7 @@ delete_expired_logfile() {
 synchronize_from_src_to_des() {
 	rsync -avz --xattrs --delete $_SRC_USER@$_SRC_IP:$_SRC_DIR/ $_DEST_DIR/ >> $_LOG_FILE 2>&1
 	if [ $? -eq 0 ]; then
-		echo "[$_DATEFORMAT]:3. Synchronization was successful $_SRC_IP:$_SRC_DIR <-> localhost:$_DEST_DIR." >> $_LOG_FILE
+		echo "[$_DATEFORMAT]:3. Synchronization was successful $_SRC_IP:$_SRC_DIR <-> $HOSTNAME:$_DEST_DIR." >> $_LOG_FILE
 		echo -e "3. Checking Synchronization $_SRC_IP:$_SRC_DIR <-> $HOSTNAME:$_DEST_DIR. 【 \e[32mO K\e[0m 】"
 	else
 		echo "[$_DATEFORMAT]: Synchronization was failed with code 1" >> $_LOG_FILE
