@@ -1,11 +1,11 @@
 #!/bin/bash
 
-_SRC_USER=xxxx
-_SRC_IP=xxxx
-_SRC_DIR=xxxx
-_DEST_DIR=xxxx
+_SRC_USER=s.lee
+_SRC_IP=10.146.0.13
+_SRC_DIR=/home/s.lee/rsync_home
+_DEST_DIR=/home/s.lee/rsync_home
 
-_LOG_DIR=xxxx
+_LOG_DIR=/home/s.lee/rsync_log
 _LOG_FILE=$_LOG_DIR/rsync_`date +'%Y%m%d'`.log
 _MAX_LOGDAY=5
 
@@ -13,7 +13,7 @@ _MAX_LOGDAY=5
 _DATEFORMAT=`date +'%Y/%m/%d %H:%M:%S'`
 _SSH_PRI=~/.ssh/id_rsa
 
-_ADMIN_MAIL=xxxx
+_ADMIN_MAIL=s.lee@rescuenow.co.jp
 
 delete_expired_logfile() {
 	echo "[$_DATEFORMAT]: Delete expired backup files modified longger than $_MAX_LOGDAY days ago in $_LOG_DIR." >> $_LOG_FILE
