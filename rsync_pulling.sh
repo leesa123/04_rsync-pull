@@ -1,13 +1,13 @@
 #!/bin/bash
 
-_SRC_USER=xxxx
+_SRC_USER=root
 _SRC_IP=xxxx
 _SRC_DIR=xxxx
 _DEST_DIR=xxxx
 
-_LOG_DIR=xxxx
+_LOG_DIR=/opt/rsync_pull/log
 _LOG_FILE=$_LOG_DIR/rsync_`date +'%Y%m%d'`.log
-_MAX_LOGDAY=5
+_MAX_LOGDAY=10
 
 
 _DATEFORMAT=`date +'%Y/%m/%d %H:%M:%S'`
@@ -17,7 +17,7 @@ _ADMIN_MAIL=xxxx
 
 delete_expired_logfile() {
 	echo "[$_DATEFORMAT]: Delete expired backup files modified longger than $_MAX_LOGDAY days ago in $_LOG_DIR." >> $_LOG_FILE
-	find $_LOG_DIR -mtime +"$_MAX_LOGDAY" -delete -print >> $_LOG_FILE 2>&1
+	tmpwatch -m $(( $_MAX_LOGDAY * 24 )) $_LOG_DIR --verbose >> $_LOG_FILE 2>&1
 	echo -e "1. Delete expired backup files modified longger than $_MAX_LOGDAY days ago in $_LOG_DIR.【 \e[32mO K\e[0m 】"
 }
 
