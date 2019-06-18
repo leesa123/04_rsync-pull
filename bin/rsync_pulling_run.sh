@@ -31,7 +31,7 @@ main() {
 			notify_error
 		fi
 	else
-			notify_error
+		notify_error
 	fi
 }
 
