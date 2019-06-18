@@ -6,7 +6,7 @@ _SRC_USER=root
 _SSH_PRI=~/.ssh/id_rsa
 
 # App log
-_ROOT_DIR=/opt/rsync_pull
+_ROOT_DIR=/opt/rsync-pull
 _BIN_DIR=$_ROOT_DIR/bin
 _LOG_DIR=$_ROOT_DIR/log
 _LOG_FILE=$_LOG_DIR/rsync_`date +'%Y%m%d'`.log
