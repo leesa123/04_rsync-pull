@@ -3,7 +3,7 @@
 if [ -e /opt/rsync-pull/log ]; then
         echo "" > /dev/null
 else
-        mkdir /opt/rsync-pull/log
+        mkdir -p /opt/rsync-pull/log
 fi
 touch -d "1 days ago" /opt/rsync-pull/log/rsync_20190613.log
 touch -d "2 days ago" /opt/rsync-pull/log/rsync_20190612.log
@@ -20,28 +20,28 @@ touch -d "12 days ago" /opt/rsync-pull/log/rsync_20190602.log
 touch -d "13 days ago" /opt/rsync-pull/log/rsync_20190601.log
 
 # create resource directory
-if [ -e /var/www/html ]; then
+if [ -e /tmp/rsync_test/html ]; then
         echo "" > /dev/null
 else
-        mkdir /var/www/html
+        mkdir -p /tmp/rsync_test/html
 fi
-touch /var/www/html/index.php
-touch /var/www/html/local-adminer-SJs8wL1FQ.php
-touch /var/www/html/logo_rescuenow_642_83_navy.png
-touch /var/www/html/wp-activate.php
-touch /var/www/html/wp-comments-post.php
-touch /var/www/html/wp-content
-touch /var/www/html/wp-links-opml.php
-touch /var/www/html/wp-mail.php
-touch /var/www/html/wp-snapshots
-touch /var/www/html/license.txt
-touch /var/www/html/local-phpinfo.php
-touch /var/www/html/logorsq.png
-touch /var/www/html/wp-admin
-touch /var/www/html/wp-config-sample.php
-touch /var/www/html/wp-cron.php
-touch /var/www/html/wp-load.php
-touch /var/www/html/wp-settings.php
-touch /var/www/html/wp-trackback.php
-touch /var/www/html/local-adminer-BJ8k3PHSG.php
-touch /var/www/html/login22.html
+touch /tmp/rsync_test/html/index.php
+touch /tmp/rsync_test/html/local-adminer-SJs8wL1FQ.php
+touch /tmp/rsync_test/html/logo_rescuenow_642_83_navy.png
+touch /tmp/rsync_test/html/wp-activate.php
+touch /tmp/rsync_test/html/wp-comments-post.php
+touch /tmp/rsync_test/html/wp-content
+touch /tmp/rsync_test/html/wp-links-opml.php
+touch /tmp/rsync_test/html/wp-mail.php
+touch /tmp/rsync_test/html/wp-snapshots
+touch /tmp/rsync_test/html/license.txt
+touch /tmp/rsync_test/html/local-phpinfo.php
+touch /tmp/rsync_test/html/logorsq.png
+touch /tmp/rsync_test/html/wp-admin
+touch /tmp/rsync_test/html/wp-config-sample.php
+touch /tmp/rsync_test/html/wp-cron.php
+touch /tmp/rsync_test/html/wp-load.php
+touch /tmp/rsync_test/html/wp-settings.php
+touch /tmp/rsync_test/html/wp-trackback.php
+touch /tmp/rsync_test/html/local-adminer-BJ8k3PHSG.php
+touch /tmp/rsync_test/html/login22.html
