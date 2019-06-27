@@ -4,11 +4,14 @@
 # cmd-variables.sh : Import command-variables for using in rsync
 # env-variables.sh : Import environment-variables for using in func.sh 
 # func.sh : Import function was consist of deleting log, cheking ssh-private ...etc 
+. ~/.bash_profile
 . ./cmd-variables.sh 
 . ./env-variables.sh 
 . ./func.sh
 
 main() {
+	check_param_num 
+	set_synchronize_mode
 	if [ -e $_LOG_DIR ]; then
 		echo "[`date +"$_DATEFORMAT"`]: Open log directory $_LOG_DIR" > $_LOG_FILE
 	else

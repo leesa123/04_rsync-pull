@@ -1,5 +1,6 @@
 # Param
 _PARAM_1=$1
+_PARAM_NUM=$#
 
 # Rsync
 _SRC_USER=root
@@ -16,10 +17,10 @@ _DEST_IP=`hostname -i`
 _SSH_KNOWN='~/.ssh/known_hosts'
 
 # Zabbix
-_ZBX_SERVER_IP=xxxx
-_ZBX_AGENT_HOST=xxxx
-_ZBX_ITEM=xxxx
-_ZBX_MSG=xxxx
+_ZBX_SERVER_IP=10.146.0.13
+_ZBX_AGENT_HOST='Zabbix Agent01'
+_ZBX_ITEM='test.trapper'
+_ZBX_MSG='failed'
 
 # Mailx
 #_ADMIN_MAIL=xxxx@xxxx.co.jp
