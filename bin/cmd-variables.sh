@@ -14,7 +14,7 @@ if [ $? -ne 0 ]; then
 	blank_error
 fi
 # Backup server's symmetric directory for synchronization
-_DEST_DIR='/ tmp/rsync_test/html/'
+_DEST_DIR=xxxx
 if [ $? -ne 0 ]; then
 	blank_error
 fi
