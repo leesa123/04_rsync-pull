@@ -26,13 +26,10 @@ delete_expired_logfile() {
 }
 
 set_synchronize_mode() {
-	case "$_PARAM_1" in
-		"--dry-run" ) _OPTION=`echo ${MODE[--dry-run]}` ;;
-		"--dry-run-diff" ) _OPTION=`echo ${MODE[--dry-run-diff]}` ;;
-		"--run" ) _OPTION=`echo ${MODE[--run]}` ;;
-		"--run-diff" ) _OPTION=`echo ${MODE[--run-diff]}` ;;
-		* ) usage ;;
-	esac
+	_OPTION=${MODE["$_PARAM_1"]}
+	if [ -z "$_OPTION" ]; then
+		usage
+	fi
 }
 
 synchronize_from_src_to_des() {
