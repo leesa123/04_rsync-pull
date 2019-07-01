@@ -1,9 +1,21 @@
 #!/bin/bash
+. ./msg.sh
 
 check_param_num() {
 	if [ $_PARAM_NUM -ne 1 ]; then
 		usage
-		exit 1
+	fi
+}
+
+check_dirpath_isblank() {
+	echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
+	if [ $? -eq 0 ]; then
+		blank_error
+	fi
+	
+	echo $_DEST_DIR | egrep --only-matching '[[:blank:]]' 
+	if [ $? -eq 0 ]; then
+		blank_error
 	fi
 }
 
@@ -85,34 +97,5 @@ check_ssh_knownhost() {
 
 notify_error() {
 	# Zabbix
-        /usr/bin/zabbix_sender -v -z $_ZBX_SERVER_IP -s "$_ZBX_AGENT_HOST" -k "$_ZBX_ITEM" -o "$_ZBX_MSG" >> $_LOG_FILE
-        #cat $_BIN_DIR/alert.txt | mailx -s "rsync was failed." -r $HOSTNAME $_ADMIN_MAIL
-}
-
-usage() {
-cat <<_EOT_
-Usage:
-  	$0 [--dry-run, --dry-run-diff, --run, --run-diff]
-
-Description:
- 	This is a tool to synchronize by pulling method. 
-	If you hit without specifying any option, '--dry-run' will be executed.		
-
-Options:
-	--dry-run	Perform a trial run with no changes mode.
-			You can check target files from the log file.
-			(default)
-  	--dry-run-diff	It has the some functionality as '--dry-run'.
-			Additionly, you can use checksum to check data differences. not mod-time & size
-			You can check target files from the log file.
-
-  	--run		It is not trial mode. Actually synchronized.
-			The target to be synchronized can be confirmed in '--dry-run'. 
-			
-  	--run-diff	It has the some functionality as '--run'.
-			The target to be synchronized can be confirmed in '--dry-run-diff'.
-
-
-_EOT_
-exit 1
+        /usr/bin/zabbix_sender -v -c $_ZBX_CONFIG -k "$_ZBX_ITEM" -o "$_ZBX_MSG" >> $_LOG_FILE
 }

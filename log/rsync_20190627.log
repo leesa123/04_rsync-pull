@@ -1,12 +1,12 @@
-[2019/06/27 19:22:08]: Open log directory /opt/rsync-pull/log
-[2019/06/27 19:22:08]: Delete expired backup files modified longger than 10 days ago in /opt/rsync-pull/log.
-[2019/06/27 19:22:08]: Checking id_rsa was successful
-[2019/06/27 19:22:08]: 10.146.0.13 is registered in ~/.ssh/known_hosts
-[2019/06/27 19:22:08]: Start synchronization.
+[2019/06/27 19:25:36]: Open log directory /opt/rsync-pull/log
+[2019/06/27 19:25:36]: Delete expired backup files modified longger than 10 days ago in /opt/rsync-pull/log.
+[2019/06/27 19:25:36]: Checking id_rsa was successful
+[2019/06/27 19:25:36]: 10.146.0.13 is registered in ~/.ssh/known_hosts
+[2019/06/27 19:25:36]: Start synchronization.
 receiving incremental file list
 
-sent 20 bytes  received 970 bytes  1,980.00 bytes/sec
+sent 20 bytes  received 650 bytes  446.67 bytes/sec
 total size is 0  speedup is 0.00
-[2019/06/27 19:22:08]:3. Synchronization was successful 10.146.0.13:/tmp/rsync_test/html/ <-> 10.146.0.14:/tmp/rsync_test/html/.
-[2019/06/27 19:22:08]: Execution was successful. Ended Normally
-[2019/06/27 19:22:08]: Ended Normally
+[2019/06/27 19:25:37]:3. Synchronization was successful 10.146.0.13:/tmp/rsync_test/html/ <-> 10.146.0.14:/tmp/rsync_test/html/.
+[2019/06/27 19:25:37]: Execution was successful. Ended Normally
+[2019/06/27 19:25:37]: Ended Normally

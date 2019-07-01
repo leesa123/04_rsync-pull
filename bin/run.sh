@@ -10,15 +10,19 @@
 . ./func.sh
 
 main() {
-	check_param_num 
+	check_param_num
 	set_synchronize_mode
+	check_dirpath_isblank
+
 	if [ -e $_LOG_DIR ]; then
 		echo "[`date +"$_DATEFORMAT"`]: Open log directory $_LOG_DIR" > $_LOG_FILE
 	else
 		echo "[`date +"$_DATEFORMAT"`]: Create log directory $_LOG_DIR" > $_LOG_FILE
         	mkdir -p $_LOG_DIR
 	fi
+
 	delete_expired_logfile
+
 	check_ssh_pri_key
 	if [ $? -eq 0 ]; then
 		check_ssh_knownhost

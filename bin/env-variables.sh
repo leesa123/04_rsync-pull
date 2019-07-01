@@ -1,6 +1,8 @@
+#!/bin/bash
+
 # Param
-_PARAM_1=$1
 _PARAM_NUM=$#
+_PARAM_1=$1
 
 # Rsync
 _SRC_USER=root
@@ -17,8 +19,7 @@ _DEST_IP=`hostname -i`
 _SSH_KNOWN='~/.ssh/known_hosts'
 
 # Zabbix
-_ZBX_SERVER_IP=10.146.0.13
-_ZBX_AGENT_HOST='Zabbix Agent01'
+_ZBX_CONFIG=/etc/zabbix/zabbix_agentd.conf
 _ZBX_ITEM='test.trapper'
 _ZBX_MSG='failed'
 
