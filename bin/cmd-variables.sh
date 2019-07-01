@@ -12,11 +12,9 @@ _SRC_IP=xxxx
 _SRC_DIR=xxxx
 if [ $? -ne 0 ]; then
 	blank_error
-	exit 1
 fi
 # Backup server's symmetric directory for synchronization
 _DEST_DIR=xxxx
 if [ $? -ne 0 ]; then
 	blank_error
-	exit 1
 fi
