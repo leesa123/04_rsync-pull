@@ -1,5 +1,4 @@
 #!/bin/bash
-. ./msg.sh
 
 # Production server's ip
 _SRC_IP=xxxx
@@ -10,11 +9,13 @@ _SRC_IP=xxxx
 
 # Production server's symmetric directory for synchronization
 _SRC_DIR=xxxx
+
 if [ $? -ne 0 ]; then
-	blank_error
+	_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_5)
 fi
 # Backup server's symmetric directory for synchronization
 _DEST_DIR=xxxx
+
 if [ $? -ne 0 ]; then
-	blank_error
+	_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_9)
 fi

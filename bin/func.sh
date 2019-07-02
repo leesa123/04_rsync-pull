@@ -10,13 +10,49 @@ check_param_num() {
 check_dirpath_isblank() {
 	echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
 	if [ $? -eq 0 ]; then
-		blank_error
+		_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_1)
 	fi
 	
 	echo $_DEST_DIR | egrep --only-matching '[[:blank:]]' 
 	if [ $? -eq 0 ]; then
-		blank_error
+		_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_3)
 	fi
+	blank_error_param $_MSG_TOTAL
+}
+
+blank_error_param() {
+	# [blank-point-Info] _MSG_TOTAL 
+
+	# ※ Promise symbol ※
+        # In the case of setting variable by quotatio -> Q
+        # In the case of setting variable by non-quotation -> NQ
+	# 
+	# [Symbol]	[DIR]			[TOTAL]
+	# Q		_SRC_DIR		1
+	# Q		_DEST_DIR		3
+	# NQ		_SRC_DIR		5
+	# NQ		_DEST_DIR		9
+	# Q|Q		_SRC_DIR|_DEST_DIR	4
+	# Q|NQ		_SRC_DIR|_DEST_DIR	10
+	# NQ|Q		_SRC_DIR|_DEST_DIR	8
+	# NQ|NQ		_SRC_DIR|_DEST_DIR	14
+
+	_SYMBOL_QUOTATION='Q'
+	_SYMBOL_NONQUOTATION='NQ'
+	_DIR_SRC_DIR='_SRC_DIR'
+	_DIR_DEST_DIR='_DEST_DIR'
+
+	case "$_MSG_TOTAL" in
+		1)	blank_error $_SYMBOL_QUOTATION $_DIR_SRC_DIR ;;
+		3)	blank_error $_SYMBOL_QUOTATION $_DIR_DEST_DIR ;;
+		5)	blank_error $_SYMBOL_NONQUOTATION $_DIR_SRC_DIR ;;
+		9)	blank_error $_SYMBOL_NONQUOTATION $_DIR_DEST_DIR ;;
+		4)	blank_error $_SYMBOL_QUOTATION'|'$_SYMBOL_QUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
+		10)	blank_error $_SYMBOL_QUOTATION'|'$_SYMBOL_NONQUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
+		8)	blank_error $_SYMBOL_NONQUOTATION'|'$_SYMBOL_QUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
+		14)	blank_error $_SYMBOL_NONQUOTATION'|'$_SYMBOL_NONQUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;; 
+	esac
+	
 }
 
 delete_expired_logfile() {

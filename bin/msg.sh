@@ -30,8 +30,8 @@ exit 1
 
 blank_error() {
 cat <<_EOT_
-Error:
-        Variables _SRC_DIR, _DEST_DIR in the cmd-variables.sh contains a space or tab character
+Error:  
+        Variables [$1] : $2 in the cmd-variables.sh contains a space or tab character
 
 Risk:
         Mistakes result in unintended results being copied. This can cause fatal errors on Linux OS system.

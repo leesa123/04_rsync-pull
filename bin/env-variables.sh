@@ -23,9 +23,6 @@ _ZBX_CONFIG=/etc/zabbix/zabbix_agentd.conf
 _ZBX_ITEM='test.trapper'
 _ZBX_MSG='failed'
 
-# Mailx
-#_ADMIN_MAIL=xxxx@xxxx.co.jp
-
 # Excute Mode
 declare -A MODE;
 
@@ -38,3 +35,12 @@ MODE=(
 
 # Option
 _OPTION='Default value is --dry-run'
+
+# Blank_error 
+_MSG_TOTAL=0
+_MSG_NUM_1=1
+_MSG_NUM_3=3
+_MSG_NUM_5=5
+_MSG_NUM_9=9
+
+

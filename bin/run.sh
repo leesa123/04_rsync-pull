@@ -5,8 +5,8 @@
 # env-variables.sh : Import environment-variables for using in func.sh 
 # func.sh : Import function was consist of deleting log, cheking ssh-private ...etc 
 . ~/.bash_profile
-. ./cmd-variables.sh 
 . ./env-variables.sh 
+. ./cmd-variables.sh 
 . ./func.sh
 
 main() {
