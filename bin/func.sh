@@ -24,7 +24,7 @@ blank_error_param() {
 	# [blank-point-Info] _MSG_TOTAL 
 
 	# ※ Promise symbol ※
-        # In the case of setting variable by quotatio -> Q
+        # In the case of setting variable by quotation -> Q
         # In the case of setting variable by non-quotation -> NQ
 	# 
 	# [Symbol]	[DIR]			[TOTAL]
