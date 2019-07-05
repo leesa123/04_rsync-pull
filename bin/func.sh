@@ -1,5 +1,4 @@
 #!/bin/bash
-. ./msg.sh
 
 check_param_num() {
 	if [ $_PARAM_NUM -ne 1 ]; then
@@ -7,7 +6,9 @@ check_param_num() {
 	fi
 }
 
-check_dirpath_isblank() {
+# The function 'check_dirpath_isblank_nq' is being in the trap.sh
+# checking quatation values of '_SRC_DIR or _DEST_DIR'
+check_dirpath_isblank_q() {
 	echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
 	if [ $? -eq 0 ]; then
 		_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_1)
@@ -17,7 +18,10 @@ check_dirpath_isblank() {
 	if [ $? -eq 0 ]; then
 		_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_3)
 	fi
-	blank_error_param $_MSG_TOTAL
+	
+	if [ $_MSG_TOTAL -ne 0 ]; then
+		blank_error_param $_MSG_TOTAL
+	fi
 }
 
 blank_error_param() {
@@ -51,6 +55,7 @@ blank_error_param() {
 		10)	blank_error $_SYMBOL_QUOTATION'|'$_SYMBOL_NONQUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
 		8)	blank_error $_SYMBOL_NONQUOTATION'|'$_SYMBOL_QUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
 		14)	blank_error $_SYMBOL_NONQUOTATION'|'$_SYMBOL_NONQUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;; 
+		*)	exit 1;
 	esac
 	
 }

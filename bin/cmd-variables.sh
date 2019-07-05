@@ -1,21 +1,14 @@
 #!/bin/bash
 
-# Production server's ip
-_SRC_IP=xxxx
-
 # !Caution!
 # In the case of a directory, add '/' of literal to the end of the path.
 # ex) '/var/www/html/'
 
 # Production server's symmetric directory for synchronization
-_SRC_DIR=xxxx
+_SRC_DIR=/tmp/rsync_test/html/
 
-if [ $? -ne 0 ]; then
-	_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_5)
-fi
 # Backup server's symmetric directory for synchronization
-_DEST_DIR=xxxx
+_DEST_DIR=/tmp/rsync_test/html/
 
-if [ $? -ne 0 ]; then
-	_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_9)
-fi
+# Production server's ip
+_SRC_IP=10.146.0.13
