@@ -5,10 +5,10 @@
 # ex) '/var/www/html/'
 
 # Production server's symmetric directory for synchronization
-_SRC_DIR=/tmp/rsync_test/html/
+_SRC_DIR=xxxx
 
 # Backup server's symmetric directory for synchronization
-_DEST_DIR=/tmp/rsync_test/html/
+_DEST_DIR=xxxx
 
 # Production server's ip
-_SRC_IP=10.146.0.13
+_SRC_IP=xxxx
