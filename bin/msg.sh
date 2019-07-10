@@ -7,7 +7,7 @@ Usage:
 
 Description:
         This is a tool to synchronize by pulling method. 
-        If you hit without specifying any option, '--dry-run' will be executed.         
+        We recommend to use '--dry-run' or '--dry-run-diff' before use '-run' or '--run-diff'          
 
 Options:
         --dry-run       Perform a trial run with no changes mode.
