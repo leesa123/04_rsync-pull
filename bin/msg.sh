@@ -1,4 +1,4 @@
-#!/bin/bash
+-#!/bin/bash
 
 usage() {
 cat <<_EOT_
@@ -7,7 +7,7 @@ Usage:
 
 Description:
         This is a tool to synchronize by pulling method. 
-        We recommend to use '--dry-run' or '--dry-run-diff' before use '-run' or '--run-diff'          
+        We recommend to use '--dry-run' or '--dry-run-diff' before use '--run' or '--run-diff'          
 
 Options:
         --dry-run       Perform a trial run with no changes mode.
