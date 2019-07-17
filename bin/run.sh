@@ -11,6 +11,7 @@
 
 trap 'check_dirpath_isblank_nq $BASH_COMMAND' ERR
 . ./cmd-variables.sh > /dev/null 2>&1
+trap -- '' ERR
 
 . ./func.sh
 
