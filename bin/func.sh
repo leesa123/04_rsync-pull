@@ -84,7 +84,7 @@ synchronize_from_src_to_des() {
         else
                 echo "[`date +"$_DATEFORMAT"`]: Synchronization was failed with code 1" >> $_LOG_FILE
                 echo -e "4. Checking Synchronization $_SRC_IP:$_SRC_DIR <-> $_DEST_IP:$_DEST_DIR. 【 \e[31mFAILED\e[0m 】"
-                echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server.($_ZBX_SERVER_IP) " >> $_LOG_FILE
+                echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server." >> $_LOG_FILE
 	
 		return 1;
         fi
@@ -104,7 +104,7 @@ check_ssh_pri_key() {
                         echo "[`date +"$_DATEFORMAT"`]: It is required that your private key files are NOT accessible by others. Set the value '-rw-------'" >> $_LOG_FILE
                         echo "[`date +"$_DATEFORMAT"`]: Exiting abnormally" >> $_LOG_FILE
                         echo -e "2. Checking ssh private key file【 \e[31mFAILD\e[0m 】"
-                        echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server.($_ZBX_SERVER_IP) " >> $_LOG_FILE
+                        echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server." >> $_LOG_FILE
 
                         return 1
                 fi
@@ -112,7 +112,7 @@ check_ssh_pri_key() {
                 echo "[`date +"$_DATEFORMAT"`]: Not exists $_SSH_PRI" >> $_LOG_FILE
                 echo "[`date +"$_DATEFORMAT"`]: Exiting abnormally" >> $_LOG_FILE
                 echo -e "2. Checking ssh private key file【 \e[31mFAILD\e[0m 】"
-                echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server.($_ZBX_SERVER_IP) " >> $_LOG_FILE
+                echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server." >> $_LOG_FILE
 
                 return 1
         fi
@@ -128,7 +128,7 @@ check_ssh_knownhost() {
                 echo "[`date +"$_DATEFORMAT"`]: Not exists $_SRC_IP in $_SSH_KNOWN" >> $_LOG_FILE
                 echo "[`date +"$_DATEFORMAT"`]: Exiting abnormally" >> $_LOG_FILE
                 echo -e "3. $_SRC_IP is not registered in $_SSH_KNOWN【 \e[31mFAILD\e[0m 】"
-                echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server.($_ZBX_SERVER_IP) " >> $_LOG_FILE
+                echo "[`date +"$_DATEFORMAT"`]: Notify zabbix-server." >> $_LOG_FILE
 		return 1;
 	fi
 }
