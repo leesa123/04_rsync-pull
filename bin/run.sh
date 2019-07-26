@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # 1. Import files
-# cmd-variables.sh : Import command-variables for using in rsync
+# cmd-variables.conf : Import command-variables for using in rsync
 # env-variables.sh : Import environment-variables for using in func.sh 
 # func.sh : Import function was consist of deleting log, cheking ssh-private ...etc 
+# trap.sh : Import function to be executed when trap occurs
 . ~/.bash_profile
 . ./msg.sh
 . ./trap.sh
 . ./env-variables.sh 
 
 trap 'check_dirpath_isblank_nq $BASH_COMMAND' ERR
-. ./cmd-variables.sh > /dev/null 2>&1
+. ./cmd-variables.conf > /dev/null 2>&1
 trap -- '' ERR
 
 . ./func.sh
