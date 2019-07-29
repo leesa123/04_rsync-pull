@@ -25,20 +25,26 @@ _ZBX_MSG='failed'
 
 # Excute Mode
 declare -A MODE;
-
 MODE=(
 ["--dry-run"]="-avzn --xattrs --delete"
 ["--dry-run-diff"]="-avzcn --xattrs --delete"
 ["--run"]="-avz --xattrs --delete"
-["--run-diff"]="-avzc --xattrs --delete"
 )
 
 # Option
 _OPTION='Default value is --dry-run'
 
-# Blank_error 
+# Message
 _MSG_TOTAL=0
 _MSG_NUM_1=1
+_MSG_NUM_2=2
 _MSG_NUM_3=3
-_MSG_NUM_5=5
-_MSG_NUM_9=9
+
+_DIR_SRC_DIR='_SRC_DIR'
+_DIR_DEST_DIR='_DEST_DIR'
+
+declare -a NGDIR;
+NGDIR=(
+"/"
+"xxxx"
+)

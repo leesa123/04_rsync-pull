@@ -1,63 +1,77 @@
 #!/bin/bash
 
 check_param_num() {
-	if [ $_PARAM_NUM -ne 1 ]; then
-		usage
-	fi
+        if [ $_PARAM_NUM -ne 1 ]; then
+                usage
+        fi
+}
+
+check_directory_path() {
+	check_dirpath_isblank_q
+	check_dirpath_ng
 }
 
 # The function 'check_dirpath_isblank_nq' is being in the trap.sh
 # checking quatation values of '_SRC_DIR or _DEST_DIR'
 check_dirpath_isblank_q() {
-	echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
-	if [ $? -eq 0 ]; then
-		_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_1)
-	fi
+        echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
+        if [ $? -eq 0 ] || [ -z "$_SRC_DIR" ]; then
+                _MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_1)
+        fi
+
+        echo $_DEST_DIR | egrep --only-matching '[[:blank:]]'
+        if [ $? -eq 0 ] || [ -z "$_DEST_DIR" ]; then
+                _MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_2)
+        fi
 	
-	echo $_DEST_DIR | egrep --only-matching '[[:blank:]]' 
-	if [ $? -eq 0 ]; then
-		_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_3)
-	fi
-	
-	if [ $_MSG_TOTAL -ne 0 ]; then
-		blank_error_param $_MSG_TOTAL
-	fi
+        if [ $_MSG_TOTAL -ne 0 ]; then
+		# [blank-point-Info] _MSG_TOTAL
+
+       		# ※ Rule ※
+        	#
+        	# [DIR]                   [TOTAL]
+        	# _SRC_DIR                1
+        	# _DEST_DIR               2
+        	# _SRC_DIR, _DEST_DIR     3
+
+        	case "$_MSG_TOTAL" in
+                	1)      blank_error $_DIR_SRC_DIR  ;;
+                	2)      blank_error $_DIR_DEST_DIR ;;
+			3)      blank_error '['$_DIR_SRC_DIR'], ['$_DIR_DEST_DIR']' ;;
+                	*)      echo "Program error. Please contact the administrator." && exit 1;
+        	esac
+        fi
 }
 
-blank_error_param() {
-	# [blank-point-Info] _MSG_TOTAL 
-
-	# ※ Promise symbol ※
-        # In the case of setting variable by quotation -> Q
-        # In the case of setting variable by non-quotation -> NQ
-	# 
-	# [Symbol]	[DIR]			[TOTAL]
-	# Q		_SRC_DIR		1
-	# Q		_DEST_DIR		3
-	# NQ		_SRC_DIR		5
-	# NQ		_DEST_DIR		9
-	# Q|Q		_SRC_DIR|_DEST_DIR	4
-	# Q|NQ		_SRC_DIR|_DEST_DIR	10
-	# NQ|Q		_SRC_DIR|_DEST_DIR	8
-	# NQ|NQ		_SRC_DIR|_DEST_DIR	14
-
-	_SYMBOL_QUOTATION='Q'
-	_SYMBOL_NONQUOTATION='NQ'
-	_DIR_SRC_DIR='_SRC_DIR'
-	_DIR_DEST_DIR='_DEST_DIR'
-
-	case "$_MSG_TOTAL" in
-		1)	blank_error $_SYMBOL_QUOTATION $_DIR_SRC_DIR ;;
-		3)	blank_error $_SYMBOL_QUOTATION $_DIR_DEST_DIR ;;
-		5)	blank_error $_SYMBOL_NONQUOTATION $_DIR_SRC_DIR ;;
-		9)	blank_error $_SYMBOL_NONQUOTATION $_DIR_DEST_DIR ;;
-		4)	blank_error $_SYMBOL_QUOTATION'|'$_SYMBOL_QUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
-		10)	blank_error $_SYMBOL_QUOTATION'|'$_SYMBOL_NONQUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
-		8)	blank_error $_SYMBOL_NONQUOTATION'|'$_SYMBOL_QUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;;
-		14)	blank_error $_SYMBOL_NONQUOTATION'|'$_SYMBOL_NONQUOTATION $_DIR_SRC_DIR', '$_DIR_DEST_DIR ;; 
-		*)	exit 1;
-	esac
+check_dirpath_ng() {
 	
+	_MSG_TOTAL_LOCAL=0
+	_SRC_DIR_NG_VAL='Value detected from if statement.'
+	_DEST_DIR_NG_VAL='Value detected from if statement.'
+	
+	# 
+        for _e in ${NGDIR[@]}
+        do
+                if [ $_SRC_DIR = $_e ]; then
+			_MSG_TOTAL_LOCAL=$(expr $_MSG_TOTAL_LOCAL + $_MSG_NUM_1)
+			_SRC_DIR_NG_VAL=$_e
+		fi
+
+                if [ $_DEST_DIR = $_e ]; then
+			_MSG_TOTAL_LOCAL=$(expr $_MSG_TOTAL_LOCAL + $_MSG_NUM_2)
+			_DEST_DIR_NG_VAL=$_e
+		fi
+        done
+	
+	if [ $_MSG_TOTAL_LOCAL -ne 0 ]; then
+		case "$_MSG_TOTAL_LOCAL" in
+			1)	ngdir_error $_SRC_DIR_NG_VAL $_DIR_SRC_DIR ;;
+			2)	ngdir_error $_DEST_DIR_NG_VAL $_DIR_DEST_DIR ;;
+			3)	ngdir_error $_SRC_DIR_NG_VAL'|'$_DEST_DIR_NG_VAL $_DIR_SRC_DIR'|'$_DIR_DEST_DIR ;;
+			*)	echo "Program error. Please contact the administrator." && exit 1;
+		esac
+	fi
+
 }
 
 delete_expired_logfile() {
@@ -74,8 +88,6 @@ set_synchronize_mode() {
 }
 
 synchronize_from_src_to_des() {
-        echo "[`date +"$_DATEFORMAT"`]: Start synchronization." >> $_LOG_FILE
-        rsync $_OPTION $_SRC_USER@$_SRC_IP:$_SRC_DIR $_DEST_DIR >> $_LOG_FILE 2>&1
         if [ $? -eq 0 ]; then
                 echo "[`date +"$_DATEFORMAT"`]:3. Synchronization was successful $_SRC_IP:$_SRC_DIR <-> $_DEST_IP:$_DEST_DIR." >> $_LOG_FILE
                 echo -e "4. Checking Synchronization $_SRC_IP:$_SRC_DIR <-> $_DEST_IP:$_DEST_DIR. 【 \e[32mO K\e[0m 】"

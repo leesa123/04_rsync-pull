@@ -31,7 +31,7 @@ exit 1
 blank_error() {
 cat <<_EOT_
 Error:  
-        Variables [$1] : $2 in the cmd-variables.conf contains a space or tab character
+        $1 in the cmd-variables.conf contains a space or tab character
 
 Risk:
         Mistakes result in unintended results being copied. This can cause fatal errors on Linux OS system.
@@ -46,4 +46,18 @@ Incorrect ex:
 
 _EOT_
 exit 1
+}
+
+ngdir_error() {
+cat <<_EOT_
+Error:
+        Variables [$1] : $2 in the cmd-variables.conf contains NG-value 
+
+Risk:
+        Mistakes result in unintended results being copied. This can cause fatal errors on Linux OS system.
+        Check it again please.
+
+_EOT_
+exit 1
+
 }
