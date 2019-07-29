@@ -25,14 +25,6 @@ check_dirpath_isblank_q() {
         fi
 	
         if [ $_MSG_TOTAL -ne 0 ]; then
-		# [blank-point-Info] _MSG_TOTAL
-
-       		# ※ Rule ※
-        	#
-        	# [DIR]                   [TOTAL]
-        	# _SRC_DIR                1
-        	# _DEST_DIR               2
-        	# _SRC_DIR, _DEST_DIR     3
 
         	case "$_MSG_TOTAL" in
                 	1)      blank_error $_DIR_SRC_DIR  ;;
@@ -45,25 +37,25 @@ check_dirpath_isblank_q() {
 
 check_dirpath_ng() {
 	
-	_MSG_TOTAL_LOCAL=0
+	_MSG_TOTAL=0
 	_SRC_DIR_NG_VAL='Value detected from if statement.'
 	_DEST_DIR_NG_VAL='Value detected from if statement.'
 	 
         for _e in ${NGDIR[@]}
         do
                 if [ $_SRC_DIR = $_e ]; then
-			_MSG_TOTAL_LOCAL=$(expr $_MSG_TOTAL_LOCAL + $_MSG_NUM_1)
+			_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_1)
 			_SRC_DIR_NG_VAL=$_e
 		fi
 
                 if [ $_DEST_DIR = $_e ]; then
-			_MSG_TOTAL_LOCAL=$(expr $_MSG_TOTAL_LOCAL + $_MSG_NUM_2)
+			_MSG_TOTAL=$(expr $_MSG_TOTAL + $_MSG_NUM_2)
 			_DEST_DIR_NG_VAL=$_e
 		fi
         done
 	
-	if [ $_MSG_TOTAL_LOCAL -ne 0 ]; then
-		case "$_MSG_TOTAL_LOCAL" in
+	if [ $_MSG_TOTAL -ne 0 ]; then
+		case "$_MSG_TOTAL" in
 			1)	ngdir_error $_SRC_DIR_NG_VAL $_DIR_SRC_DIR ;;
 			2)	ngdir_error $_DEST_DIR_NG_VAL $_DIR_DEST_DIR ;;
 			3)	ngdir_error $_SRC_DIR_NG_VAL'|'$_DEST_DIR_NG_VAL $_DIR_SRC_DIR'|'$_DIR_DEST_DIR ;;
@@ -87,6 +79,8 @@ set_synchronize_mode() {
 }
 
 synchronize_from_src_to_des() {
+	echo "[`date +"$_DATEFORMAT"`]: Start synchronization." >> $_LOG_FILE
+	rsync $_OPTION $_SRC_USER@$_SRC_IP:$_SRC_DIR $_DEST_DIR >> $_LOG_FILE 2>&1
         if [ $? -eq 0 ]; then
                 echo "[`date +"$_DATEFORMAT"`]:3. Synchronization was successful $_SRC_IP:$_SRC_DIR <-> $_DEST_IP:$_DEST_DIR." >> $_LOG_FILE
                 echo -e "4. Checking Synchronization $_SRC_IP:$_SRC_DIR <-> $_DEST_IP:$_DEST_DIR. 【 \e[32mO K\e[0m 】"
