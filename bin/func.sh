@@ -48,8 +48,7 @@ check_dirpath_ng() {
 	_MSG_TOTAL_LOCAL=0
 	_SRC_DIR_NG_VAL='Value detected from if statement.'
 	_DEST_DIR_NG_VAL='Value detected from if statement.'
-	
-	# 
+	 
         for _e in ${NGDIR[@]}
         do
                 if [ $_SRC_DIR = $_e ]; then
