@@ -4,7 +4,6 @@
 # cmd-variables.conf : Import command-variables for using in rsync
 # env-variables.sh : Import environment-variables for using in func.sh 
 # func.sh : Import function was consist of deleting log, cheking ssh-private ...etc 
-# trap.sh : Import function to be executed when trap occurs
 . ~/.bash_profile
 . ./msg.sh
 . ./env-variables.sh 
