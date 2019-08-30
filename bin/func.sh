@@ -10,9 +10,7 @@ check_directory_path() {
 	check_dirpath_isblank_q
 	check_dirpath_ng
 }
-
-# The function 'check_dirpath_isblank_nq' is being in the trap.sh
-# checking quatation values of '_SRC_DIR or _DEST_DIR'
+# checking blank or tab of '_SRC_DIR or _DEST_DIR'
 check_dirpath_isblank_q() {
         echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
         if [ $? -eq 0 ] || [ -z "$_SRC_DIR" ]; then
