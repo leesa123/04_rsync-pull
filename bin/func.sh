@@ -10,6 +10,7 @@ check_directory_path() {
 	check_dirpath_isblank_q
 	check_dirpath_ng
 }
+
 # checking blank or tab of '_SRC_DIR or _DEST_DIR'
 check_dirpath_isblank_q() {
         echo $_SRC_DIR | egrep --only-matching '[[:blank:]]'
